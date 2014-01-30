@@ -6,7 +6,7 @@ import time
 def main(scr):
     scr.nodelay(True)
     while True:
-        if scr.getch() != -1:
+        if scr.getch() not in (curses.ERR, curses.KEY_RESIZE):
             break
         my, mx = scr.getmaxyx()
         scr.clear()
