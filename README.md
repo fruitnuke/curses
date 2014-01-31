@@ -7,4 +7,4 @@ Display a static ascii "image".
 A very simple animation.
 
 ### 03 mandelbrot.py
-Add color.
+Add color (requires a terminal mode that supports at least 16 colors).
