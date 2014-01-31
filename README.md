@@ -5,3 +5,6 @@ Display a static ascii "image".
 
 ### 02 noise.py
 A very simple animation.
+
+### 03 mandelbrot.py
+Add color.
