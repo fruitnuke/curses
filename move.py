@@ -3,15 +3,22 @@ import curses
 
 def main(scr):
     curses.curs_set(0)
+    scr.nodelay(True)
     scr.clear()
     my, mx = scr.getmaxyx()
     x = int(mx/2)
     y = my - int(my/2)
+    ax = 0
+    ay = 0
 
     while True:
         scr.clear()
         scr.addch(y, x, chr(0x263A))
         key = scr.getch()
+
+        if key == curses.ERR:
+            continue
+
         if key in [ord('q'), ord('Q')]:
             break
         if key == curses.KEY_LEFT:
