@@ -5,6 +5,8 @@ Learning to use the (python) curses library. See [screencasts](http://www.youtub
 Drawing an ascii picture of a (configurable-size) checkers board in the
 terminal.
 
+![checkers.py screenshot](http://fruitnuke.github.io/curses/img/screen01.png)
+
     $ python3 checkers.py --size=10
 
 #### 02 noise.py
@@ -24,6 +26,8 @@ extended support for color in Terminal.App on Mac OS X is pretty limited!
 #### 04 move.py
 
 Using keyboard input to move a character around the terminal screen.
+
+	$ python3 move.py
 
 #### 05 windows.py
 
