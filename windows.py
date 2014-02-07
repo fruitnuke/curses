@@ -19,9 +19,12 @@ def main(stdscr):
     stdscr.refresh()
     stdscr.nodelay(True)
 
+    scrs = []
+    fns  = []
+
     winy, winx = stdscr.getmaxyx()
-    scr1 = make_win(winy, winx)
-    fn = random.choice([noise, mandel])
+    scrs.append(make_win(winy, winx))
+    fns.append(random.choice([noise, mandel]))
 
     while True:
         key = stdscr.getch()
@@ -30,24 +33,39 @@ def main(stdscr):
         elif key == curses.KEY_RESIZE:
             winy, winx = stdscr.getmaxyx()
         elif key != curses.ERR:
-            scr1.clear()
-            scr1.refresh()
-            scr1 = make_win(winy, winx)
-            fn = random.choice([noise, mandel, pattern()])
+            if len(scrs) > 2:
+                scr = scrs.pop(0)
+                scr.clear()
+                scr.noutrefresh()
+                fns.pop(0)
+
+            scrs.append(make_win(winy, winx))
+            fns.append(random.choice([noise, mandel, pattern]))
 
         time.sleep(0.05)
-        fn(scr1)
-        scr1.refresh()
+        for scr, fn in zip(scrs, fns):
+            fn(scr)
+
+        curses.doupdate()
+
+
+def fn(f):
+    def wrapper(scr):
+        f(scr)
+        scr.border()
+        scr.noutrefresh()
+    return wrapper
 
 
 def make_win(winy, winx):
-    x1 = random.randint(0, winx - 10)
-    y1 = random.randint(0, winy - 10)
-    x2 = random.randint(x1 + 10, winx)
-    y2 = random.randint(y1 + 10, winy)
+    x1 = random.randint(0, winx // 2)
+    y1 = random.randint(0, winy // 2)
+    x2 = random.randint(x1 + 20, winx)
+    y2 = random.randint(y1 + 20, winy)
     return curses.newwin(y2 - y1, x2 - x1, y1, x1)
 
 
+@fn
 def noise(scr):
     my, mx = scr.getmaxyx()
     scr.clear()
@@ -56,6 +74,7 @@ def noise(scr):
             scr.addch(y, x, chr(0x2588))
 
 
+@fn
 def mandel(scr):
     my, mx = scr.getmaxyx()
     for y, x in itertools.product(range(my-1), range(0, mx-1, 2)):
@@ -69,17 +88,14 @@ def mandel(scr):
         scr.addch(y, x + 1, chr(0x02588), curses.color_pair(col))
 
 
-class pattern():
-
-    def __init__(self):
-        self.n = 0
-
-    def __call__(self, scr):
-        my, mx = scr.getmaxyx()
-        for y, x in itertools.product(range(my-1), range(0, mx-1)):
-            i = x + y + self.n
-            scr.addch(y, x, ord('a') + (i % 26), curses.color_pair(i % 8))
-        self.n += 1
+@fn
+def pattern(scr):
+    my, mx = scr.getmaxyx()
+    color = curses.color_pair(2)
+    a = ord('a')
+    n = int(time.perf_counter() * 16)
+    for y, x in itertools.product(range(my-1), range(0, mx-1)):
+        scr.addch(y, x, a + (n + x + y) % 26, color)
 
 
 if __name__ == '__main__':
