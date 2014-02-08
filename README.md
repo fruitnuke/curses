@@ -13,6 +13,8 @@ terminal.
 
 Using refresh and non-blocking key input to display an animation of white noise.
 
+<img src="http://fruitnuke.github.io/curses/img/noise.gif" height="50%" width="50%"/>
+
     $ python3 noise.py
 
 #### 03 mandelbrot.py
@@ -41,3 +43,9 @@ patterns (noise, mandelbrot or scrolling ascii).
 Using pads to scroll around an area larger than the screen.
 
 	$ python3 mandelpad.py
+
+#### 07 menu.py
+
+Create an interactive menu from scratch, and try out attributes while I'm at it.
+
+	$ python3 menu.py
