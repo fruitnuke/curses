@@ -5,7 +5,7 @@ Learning to use the (python) curses library. See [screencasts](http://www.youtub
 Drawing an ascii picture of a (configurable-size) checkers board in the
 terminal.
 
-![checkers.py screenshot](http://fruitnuke.github.io/curses/img/screen01.png)
+<img src="http://fruitnuke.github.io/curses/img/checkers.png" height="50%" width="50%"/>
 
     $ python3 checkers.py --size=10
 
