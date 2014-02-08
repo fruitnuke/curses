@@ -4,7 +4,9 @@ import time
 
 
 def main(scr):
+    curses.curs_set(0)
     scr.nodelay(True)
+
     while True:
         if scr.getch() not in (curses.ERR, curses.KEY_RESIZE):
             break

@@ -3,6 +3,8 @@ import curses
 
 
 def main(scr, n):
+    curses.curs_set(0)
+
     maxy, maxx = scr.getmaxyx()
     for y in range(maxy-1):
         for x in range(maxx):
