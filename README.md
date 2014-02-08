@@ -23,6 +23,8 @@ Experimenting with color in curses by drawing a mandelbrot plot. (Requires a
 terminal with at least 16 colors.) I discovered after trial-and-error that
 extended support for color in Terminal.App on Mac OS X is pretty limited!
 
+<img src="http://fruitnuke.github.io/curses/img/mandel.png" height="50%" width="50%"/>
+
     $ python3 mandelbrot.py
 
 #### 04 move.py
